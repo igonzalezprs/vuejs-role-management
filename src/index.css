@@ -10,3 +10,11 @@ html, body {
 body {
   background-color: #F9F9F8
 }
+
+.app-input {
+  @apply relative bg-white border-b-2 border-accent pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-0 sm:text-sm
+}
+
+.app-input-icon--right {
+  @apply ml-3 absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none
+}
