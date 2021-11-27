@@ -22,7 +22,7 @@
     <AppToggle v-model="formData.editable" />
   </div>
 
-  <div class="flex align-center mt-4">
+  <div class="flex align-center mt-8">
     <span class="mr-6 form-label">Active</span>
     <AppToggle v-model="formData.active" />
   </div>

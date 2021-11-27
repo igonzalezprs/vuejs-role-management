@@ -3,30 +3,40 @@
     User Roles Management
   </h1>
   <div class="mt-16 w-full">
-    <div class="flex">
-      <AppInput
-        v-model="search"
-        class="w-1/2 mr-4"
-        placeholder="Search..."
-      >
-        <template #icon>
-          <img
-            src="icons/search.svg"
-            class="h-5 w-5"
-          >
-        </template>
-      </AppInput>
-      <AppSelect
-        v-model="selectedFilter"
-        :items="filters"
-        class="w-1/2"
-      />
+    <div class="flex justify-between align-center">
+      <div class="flex">
+        <AppInput
+          v-model="search"
+          class="w-1/3 mr-4"
+          placeholder="Search..."
+        >
+          <template #icon>
+            <img
+              src="icons/search.svg"
+              class="h-5 w-5"
+            >
+          </template>
+        </AppInput>
+        <AppSelect
+          v-model="selectedFilter"
+          :items="filters"
+          class="w-1/3"
+        />
+      </div>
+      <div>
+        <button
+          class="bg-accent px-6 py-2 text-white flex-grow rounded-xs text-sm "
+          @click="createRole"
+        >
+          CREATE ROLE
+        </button>
+      </div>
     </div>
 
     <div class="mt-16">
       <div
         v-if="filteredRoles.length"
-        class="flex flex-wrap gap-4"
+        class="flex flex-wrap gap-6"
       >
         <RoleCard
           v-for="role in filteredRoles"
@@ -99,8 +109,12 @@ const deleteRole = async (roleId) => {
   }
 };
 
-const updateRole = async (roleId) => {
+const updateRole = (roleId) => {
   router.push({ name: 'RoleEdit', params: { roleId } });
+};
+
+const createRole = () => {
+  router.push({ name: 'RoleCreate' });
 };
 
 onBeforeMount(async () => {

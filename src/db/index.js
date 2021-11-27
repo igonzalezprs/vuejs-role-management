@@ -5,7 +5,7 @@ import initialRoles from './user_roles';
 
 let roles = localStorage.mockData
   ? JSON.parse(localStorage.mockData)
-  : JSON.stringify(initialRoles);
+  : initialRoles;
 
 const updateStorage = () => {
   localStorage.mockData = JSON.stringify(roles);
@@ -36,8 +36,11 @@ const getOne = (id) => {
 
 const createOne = (data) => {
   const { id } = roles[roles.length - 1];
-  const role = { id, ...data };
-  roles.push(role);
+  const role = { id: id + 1, ...data };
+  roles.push({
+    ...role,
+    created_on: moment().format('YYYY-MM-DD'),
+  });
   updateStorage();
   return mockSuccess(role);
 };
