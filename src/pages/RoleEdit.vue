@@ -1,6 +1,6 @@
 <template>
   <h1 class="text-2xl">
-    User Roles Management
+    User Roles Management - Edit role {{ role && role.name }}
   </h1>
   <div
     v-if="role"

@@ -7,10 +7,10 @@
       INACTIVE
     </div>
     <div class="p-6 flex-grow flex flex-col justify-center">
-      <div class="text-2xl font-semibold">
+      <div class="text-2xl font-semibold truncate">
         {{ role.name }}
       </div>
-      <div class="text-md text-gray-600">
+      <div class="text-md text-gray-600 truncate">
         {{ roleType }}
       </div>
       <div class="text-sm mt-8">
