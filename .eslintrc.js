@@ -4,6 +4,19 @@ module.exports = {
     'vue/setup-compiler-macros': true,
     jest: true,
   },
+  settings: {
+    'import/resolver': {
+      node: {
+        extensions: ['.js', '.vue'],
+      },
+      alias: {
+        map: [
+          ['@', './src'],
+        ],
+        extensions: ['.js', '.vue'],
+      },
+    },
+  },
   extends: [
     'eslint:recommended',
     'plugin:vue/vue3-recommended',
@@ -13,5 +26,6 @@ module.exports = {
     'vue/require-default-prop': 'off',
     'max-len': 'off',
     'import/no-extraneous-dependencies': 'off',
+    'no-param-reassign': 'off',
   },
 };
