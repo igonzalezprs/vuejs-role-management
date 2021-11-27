@@ -11,7 +11,7 @@
         {{ role.name }}
       </div>
       <div class="text-md text-gray-600">
-        {{ role.type }}
+        {{ roleType }}
       </div>
       <div class="text-sm mt-8">
         {{ role.description }}
@@ -75,5 +75,13 @@ const getEditLabel = computed(() => {
   return props.role.created_on === props.role.modified_on
     ? `Date created: ${getFormattedDate(props.role.created_on)}`
     : `Last update: ${getFormattedDate(props.role.modified_on)}`;
+});
+
+const roleType = computed(() => {
+  switch (props.role.type) {
+    case 'admin': return 'Administrator Role';
+    case 'job_admin': return 'Job Administration Role';
+    default: return '-';
+  }
 });
 </script>

@@ -10,7 +10,7 @@
       </span>
       <span class="app-input-icon--right">
         <img
-          src="icons/chevron-down.svg"
+          src="/icons/chevron-down.svg"
           class="h-5 w-5"
         >
       </span>
@@ -26,20 +26,20 @@
       <li
         v-for="item in items"
         id="listbox-option-0"
-        :key="item.id"
+        :key="item.value"
         class="cursor-default select-none relative py-2 pl-3 pr-9 hover:text-white hover:bg-accent"
-        :class="getItemClass(item.id)"
+        :class="getItemClass(item.value)"
         role="option"
-        @click="selectItem(item)"
+        @click="selectItem(item.value)"
       >
         <span class="font-normal ml-3 block truncate">
           {{ item.label }}
         </span>
 
         <span
-          v-if="isSelected(item.id)"
+          v-if="isSelected(item.value)"
           class="absolute inset-y-0 right-0 flex items-center pr-4"
-          :class="getItemCheckmarkClass(item.id)"
+          :class="getItemCheckmarkClass(item.value)"
         >
           <svg
             class="h-5 w-5"
@@ -82,15 +82,15 @@ const toggleDrawer = () => {
 };
 
 // Logic for current selection
-const isSelected = (id) => props.modelValue === id;
-const selectedItem = computed(() => props.items.find((item) => item.id === props.modelValue));
-const selectItem = (item) => {
-  emit('update:modelValue', item.id);
+const isSelected = (value) => props.modelValue === value;
+const selectedItem = computed(() => props.items.find((item) => item.value === props.modelValue));
+const selectItem = (value) => {
+  emit('update:modelValue', value);
   toggleDrawer();
 };
 
 // Styling
-const getItemClass = (id) => (isSelected(id) ? 'text-white bg-accent' : 'text-gray-900');
-const getItemCheckmarkClass = (id) => (isSelected(id) ? 'text-white' : 'text-accent');
+const getItemClass = (value) => (isSelected(value) ? 'text-white bg-accent' : 'text-gray-900');
+const getItemCheckmarkClass = (value) => (isSelected(value) ? 'text-white' : 'text-accent');
 
 </script>

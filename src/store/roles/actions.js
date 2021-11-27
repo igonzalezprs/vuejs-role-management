@@ -11,17 +11,17 @@ export default {
     return data;
   },
 
-  async action_getRole(roleId) {
+  async action_getRole(_, roleId) {
     const { data } = await apiInstance.get(`/roles/${roleId}`);
     return data;
   },
 
-  async action_updateRole(roleId, roleData) {
+  async action_updateRole(_, { roleId, roleData }) {
     const { data } = await apiInstance.put(`/roles/${roleId}`, roleData);
     return data;
   },
 
-  async action_deleteRole(roleId) {
+  async action_deleteRole(_, roleId) {
     const { data } = await apiInstance.delete(`/roles/${roleId}`);
     return data;
   },

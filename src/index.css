@@ -31,3 +31,17 @@ body {
 .tooltip {
   @apply absolute w-auto p-2 m-2 min-w-max top-8 rounded-md shadow-md text-white bg-gray-900 text-xs invisible
 }
+
+.form-label {
+  min-width: 100px;
+}
+
+.toggle-checkbox:checked {
+  @apply: right-0 border-accent;
+  right: 0;
+  border-color: #68d391;
+  }
+  .toggle-checkbox:checked + .toggle-label {
+  @apply: bg-accent;
+  background-color: #68d391;
+  }

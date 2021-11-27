@@ -65,22 +65,22 @@ const router = useRouter();
 
 // Filter logic
 const search = ref('');
-const selectedFilter = ref(1);
+const selectedFilter = ref('all');
 
 const filters = [
-  { id: 1, label: 'Active and Inactive', value: 'all' },
-  { id: 2, label: 'Active', value: 'active' },
-  { id: 3, label: 'Inactive', value: 'inactive' },
+  { label: 'Active and Inactive', value: 'all' },
+  { label: 'Active', value: 'active' },
+  { label: 'Inactive', value: 'inactive' },
 ];
 
 const filteredRoles = computed(() => getRoles.value.filter((role) => {
   const matchesName = role.name.toLowerCase().includes(search.value.toLowerCase());
   let matchesActive = true;
 
-  if (selectedFilter.value === 2) {
+  if (selectedFilter.value === 'active') {
     matchesActive = role.active;
   }
-  if (selectedFilter.value === 3) {
+  if (selectedFilter.value === 'inactive') {
     matchesActive = !role.active;
   }
 
@@ -93,6 +93,7 @@ const deleteRole = async (roleId) => {
   loading.value = true;
   try {
     await action_deleteRole(roleId);
+    await action_fetchRoleList();
   } finally {
     loading.value = false;
   }

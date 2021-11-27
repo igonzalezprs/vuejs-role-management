@@ -1,5 +1,6 @@
 /* eslint-disable eqeqeq */
 /* eslint-disable prefer-promise-reject-errors */
+import moment from 'moment';
 import initialRoles from './user_roles';
 
 let roles = localStorage.mockData
@@ -43,7 +44,7 @@ const createOne = (data) => {
 
 const updateOne = (id, data) => {
   if (roles.find((role) => role.id == id)) {
-    roles = roles.map((role) => (role.id == id ? { ...data } : role));
+    roles = roles.map((role) => (role.id == id ? { ...data, modified_on: moment().format('YYYY-MM-DD') } : role));
     updateStorage();
     return mockSuccess({ id, ...data });
   }
@@ -65,19 +66,19 @@ const routeRegex = /\/roles\/(.+)$/;
 export default {
   get: (route) => {
     if (route === '/roles') return getAll();
-    if (routeRegex.test(route)) return getOne(route.match(routeRegex));
+    if (routeRegex.test(route)) return getOne(route.match(routeRegex)[1]);
     return mockError(404, 'Operation not found');
   },
-  post: (route) => {
-    if (route === '/roles') return createOne();
+  post: (route, data) => {
+    if (route === '/roles') return createOne(data);
     return mockError(404, 'Operation not found');
   },
-  put: (route) => {
-    if (routeRegex.test(route)) return updateOne(route.match(routeRegex));
+  put: (route, data) => {
+    if (routeRegex.test(route)) return updateOne(route.match(routeRegex)[1], data);
     return mockError(404, 'Operation not found');
   },
   delete: (route) => {
-    if (routeRegex.test(route)) return deleteOne(route.match(routeRegex));
+    if (routeRegex.test(route)) return deleteOne(route.match(routeRegex)[1]);
     return mockError(404, 'Operation not found');
   },
 };
