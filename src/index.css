@@ -8,7 +8,8 @@ html, body {
 }
 
 body {
-  background-color: #F9F9F8
+  background-color: #F9F9F8;
+  overflow-x: hidden;
 }
 
 .app-input {
@@ -21,4 +22,12 @@ body {
 
 .flex-wrap > div {
   width: calc(33.333333% - 1rem);
+}
+
+.has-tooltip:hover .tooltip {
+  @apply visible z-50;
+}
+
+.tooltip {
+  @apply absolute w-auto p-2 m-2 min-w-max top-8 rounded-md shadow-md text-white bg-gray-900 text-xs invisible
 }

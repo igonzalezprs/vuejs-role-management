@@ -28,5 +28,6 @@ module.exports = {
     'import/no-extraneous-dependencies': 'off',
     'no-param-reassign': 'off',
     'no-unused-vars': 'off',
+    camelcase: 'off',
   },
 };

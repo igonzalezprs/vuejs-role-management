@@ -1,7 +1,10 @@
 /* eslint-disable eqeqeq */
 /* eslint-disable prefer-promise-reject-errors */
+import initialRoles from './user_roles';
 
-let roles = JSON.parse(localStorage.mockData);
+let roles = localStorage.mockData
+  ? JSON.parse(localStorage.mockData)
+  : JSON.stringify(initialRoles);
 
 const updateStorage = () => {
   localStorage.mockData = JSON.stringify(roles);

@@ -6,9 +6,9 @@ import RoleEdit from '../pages/RoleEdit.vue';
 import NotFound from '../pages/NotFound.vue';
 
 const routes = [
-  { path: '/', component: RoleList },
-  { path: '/create', component: RoleCreate },
-  { path: '/:id/edit', component: RoleEdit },
+  { path: '/', name: 'RoleList', component: RoleList },
+  { path: '/create', name: 'RoleCreate', component: RoleCreate },
+  { path: '/:roleId/edit', name: 'RoleEdit', component: RoleEdit },
   { path: '/:catchAll(.*)', component: NotFound },
 ];
 

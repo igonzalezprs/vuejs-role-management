@@ -6,17 +6,17 @@ export default () => {
   const { getRoles } = useGetters(['getRoles']);
 
   const {
-    fetchRoleList,
-    createRole,
-    getRole,
-    updateRole,
-    deleteRole,
+    action_fetchRoleList,
+    action_createRole,
+    action_getRole,
+    action_updateRole,
+    action_deleteRole,
   } = useActions([
-    'fetchRoleList',
-    'createRole',
-    'getRole',
-    'updateRole',
-    'deleteRole',
+    'action_fetchRoleList',
+    'action_createRole',
+    'action_getRole',
+    'action_updateRole',
+    'action_deleteRole',
   ]);
 
   return {
@@ -24,10 +24,10 @@ export default () => {
     getRoles,
 
     // actions
-    fetchRoleList,
-    createRole,
-    getRole,
-    updateRole,
-    deleteRole,
+    action_fetchRoleList,
+    action_createRole,
+    action_getRole,
+    action_updateRole,
+    action_deleteRole,
   };
 };
