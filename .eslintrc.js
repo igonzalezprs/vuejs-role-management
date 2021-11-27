@@ -27,5 +27,6 @@ module.exports = {
     'max-len': 'off',
     'import/no-extraneous-dependencies': 'off',
     'no-param-reassign': 'off',
+    'no-unused-vars': 'off',
   },
 };

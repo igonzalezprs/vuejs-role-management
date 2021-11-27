@@ -66,7 +66,7 @@ export default {
     return mockError(404, 'Operation not found');
   },
   post: (route) => {
-    if (routeRegex.test(route)) return createOne(route.match(routeRegex));
+    if (route === '/roles') return createOne();
     return mockError(404, 'Operation not found');
   },
   put: (route) => {

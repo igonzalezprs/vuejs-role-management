@@ -11,7 +11,8 @@
   },
   "dependencies": {
     "vue": "^3.2.16",
-    "vuex": "^4.0.2"
+    "vuex": "^4.0.2",
+    "vuex-composition-helpers": "^2.0.1"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.9.3",
