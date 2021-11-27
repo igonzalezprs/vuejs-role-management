@@ -6,7 +6,7 @@
       @click="toggleDrawer"
     >
       <span class="ml-3 block truncate">
-        {{ modelValue && modelValue.label || placeholder || 'Select an item...' }}
+        {{ selectedItem && selectedItem.label || placeholder || 'Select an item...' }}
       </span>
       <span class="app-input-icon--right">
         <img
@@ -26,7 +26,7 @@
       <li
         v-for="item in items"
         id="listbox-option-0"
-        :key="item.value"
+        :key="item.id"
         class="cursor-default select-none relative py-2 pl-3 pr-9 hover:text-white hover:bg-accent"
         :class="getItemClass(item.id)"
         role="option"
@@ -60,7 +60,7 @@
   </div>
 </template>
 <script setup>
-import { ref } from '@vue/reactivity';
+import { computed, ref } from '@vue/reactivity';
 
 const props = defineProps({
   items: {
@@ -69,7 +69,7 @@ const props = defineProps({
   },
 
   placeholder: String,
-  modelValue: String,
+  modelValue: [String, Number],
 });
 
 const emit = defineEmits(['update:modelValue']);
@@ -82,9 +82,10 @@ const toggleDrawer = () => {
 };
 
 // Logic for current selection
-const isSelected = (id) => props.modelValue && props.modelValue.id === id;
+const isSelected = (id) => props.modelValue === id;
+const selectedItem = computed(() => props.items.find((item) => item.id === props.modelValue));
 const selectItem = (item) => {
-  emit('update:modelValue', item);
+  emit('update:modelValue', item.id);
   toggleDrawer();
 };
 

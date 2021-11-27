@@ -10,7 +10,7 @@
         :value="modelValue"
         class="ml-3 block w-full truncate focus:outline-none focus:border-none"
         :placeholder="placeholder"
-        @input="emit('update:modelValue')"
+        @input="emit('update:modelValue', $event.target.value)"
       >
       <span class="app-input-icon--right">
         <slot name="icon" />

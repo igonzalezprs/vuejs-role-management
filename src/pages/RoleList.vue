@@ -5,7 +5,7 @@
   <div class="mt-16 w-full">
     <div class="flex">
       <AppInput
-        v-model="input"
+        v-model="search"
         class="w-1/2 mr-4"
         placeholder="Search..."
       >
@@ -17,31 +17,39 @@
         </template>
       </AppInput>
       <AppSelect
-        v-model="selected"
-        :items="items"
+        v-model="selectedFilter"
+        :items="filters"
         class="w-1/2"
       />
     </div>
 
-    <div
-      v-if="getRoles.length"
-      class="mt-16 flex flex-wrap gap-4"
-    >
-      <RoleCard
-        v-for="role in getRoles"
-        :key="role.id"
-        class="w-1/2"
-        :role="role"
-        @role:delete="deleteRole"
-        @role:update="updateRole"
-      />
+    <div class="mt-16">
+      <div
+        v-if="filteredRoles.length"
+        class="flex flex-wrap gap-4"
+      >
+        <RoleCard
+          v-for="role in filteredRoles"
+          :key="role.id"
+          class="w-1/2"
+          :role="role"
+          @role:delete="deleteRole"
+          @role:update="updateRole"
+        />
+      </div>
+      <div
+        v-else
+        class="flex align-center justify-center text-3xl text-gray-400"
+      >
+        No roles available
+      </div>
     </div>
     <PageLoader :active="loading" />
   </div>
 </template>
 
 <script setup>
-import { ref } from '@vue/reactivity';
+import { computed, ref } from '@vue/reactivity';
 import { useRouter } from 'vue-router';
 
 import { onBeforeMount } from '@vue/runtime-core';
@@ -55,14 +63,31 @@ import PageLoader from '../components/PageLoader.vue';
 const { getRoles, action_fetchRoleList, action_deleteRole } = useRolesStore();
 const router = useRouter();
 
-const items = [
-  { id: 1, label: 'Foo bar!' },
-  { id: 2, label: 'Foo baz!' },
+// Filter logic
+const search = ref('');
+const selectedFilter = ref(1);
+
+const filters = [
+  { id: 1, label: 'Active and Inactive', value: 'all' },
+  { id: 2, label: 'Active', value: 'active' },
+  { id: 3, label: 'Inactive', value: 'inactive' },
 ];
 
+const filteredRoles = computed(() => getRoles.value.filter((role) => {
+  const matchesName = role.name.toLowerCase().includes(search.value.toLowerCase());
+  let matchesActive = true;
+
+  if (selectedFilter.value === 2) {
+    matchesActive = role.active;
+  }
+  if (selectedFilter.value === 3) {
+    matchesActive = !role.active;
+  }
+
+  return matchesActive && matchesName;
+}));
+
 const loading = ref(false);
-const input = ref('');
-const selected = ref(null);
 
 const deleteRole = async (roleId) => {
   loading.value = true;
