@@ -27,6 +27,34 @@
     <AppToggle v-model="formData.active" />
   </div>
 
+  <div
+    v-if="role.users"
+    class="mt-10"
+  >
+    <div class="text-2xl">
+      Users
+    </div>
+    <ul>
+      <li
+        v-for="user in formData.users"
+        :key="user.id"
+        class="flex items-center mt-4 w-1/3"
+      >
+        <img
+          :src="user.photo_url"
+          class="h-8 w-8 mr-4 rounded-full"
+        >
+        <span class="flex-grow">{{ user.first_name }} {{ user.last_name }}</span>
+        <button
+          class="p-2 text-red-600 hover:bg-red-200"
+          @click="removeUser(user.id)"
+        >
+          X
+        </button>
+      </li>
+    </ul>
+  </div>
+
   <div class="text-right mt-16">
     <button
       class="font-semibold py-1 px-2 hover:bg-gray-200 transition-all duration-300"
@@ -69,6 +97,10 @@ const formData = ref({
   users: [],
   created_on: '',
 });
+
+const removeUser = (id) => {
+  formData.value.users = formData.value.users.filter((user) => user.id !== id);
+};
 
 onMounted(() => {
   if (props.role) {
