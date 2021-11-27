@@ -6,6 +6,10 @@ module.exports = {
       colors: {
         backgroundGray: '#F9F9F8',
         accent: '#3EB9C8',
+        darkGray: '#CDCDCD',
+      },
+      minHeight: {
+        card: '400px',
       },
     },
   },

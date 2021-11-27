@@ -1,17 +1,13 @@
 <template>
   <h1 class="text-2xl">
-    Role List
+    User Roles Management
   </h1>
   <div class="mt-16 w-full">
     <div class="flex">
-      <AppSelect
-        v-model="selected"
-        :items="items"
-        class="w-1/2 mr-4"
-      />
       <AppInput
         v-model="input"
-        class="w-1/2"
+        class="w-1/2 mr-4"
+        placeholder="Search..."
       >
         <template #icon>
           <img
@@ -20,14 +16,29 @@
           >
         </template>
       </AppInput>
+      <AppSelect
+        v-model="selected"
+        :items="items"
+        class="w-1/2"
+      />
+    </div>
+
+    <div class="mt-16 flex flex-wrap gap-4">
+      <RoleCard
+        v-for="n in 6"
+        :key="n"
+        class="w-1/3"
+      />
     </div>
   </div>
 </template>
 
 <script setup>
 import { ref } from '@vue/reactivity';
+
 import AppSelect from '../components/AppSelect.vue';
 import AppInput from '../components/AppInput.vue';
+import RoleCard from '../components/RoleCard.vue';
 
 const items = [
   { id: 1, label: 'Foo bar!' },
